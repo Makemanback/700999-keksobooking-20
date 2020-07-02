@@ -85,10 +85,10 @@
       };
 
       var workingArea = {
-        startX: 140,
-        endX: 1280,
+        startX: window.htmlSelectors.map.offsetLeft + window.data.MAP_PIN_WIDTH / 2,
+        endX: window.htmlSelectors.map.offsetWidth + window.data.MAP_PIN_WIDTH,
         startY: 130,
-        endY: 430
+        endY: 630
       };
 
       if (moveEvt.clientX > workingArea.startX &&
