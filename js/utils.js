@@ -38,6 +38,12 @@
     }
   };
 
+  var setAddressValue = function () {
+    var locationX = Math.round(window.data.MAP_PIN_WIDTH / 2 + window.htmlSelectors.mapPinMain.offsetLeft);
+    var locationY = Math.round(window.data.MAP_PIN_HEIHGT + window.htmlSelectors.mapPinMain.offsetTop);
+    window.htmlSelectors.adressInput.value = locationX + ', ' + locationY;
+  };
+
   window.utils = {
     makeElementsDisabled: makeElementsDisabled,
     makeElementsAvailable: makeElementsAvailable,
@@ -45,6 +51,7 @@
     getRandomNumber: getRandomNumber,
     getRandomArray: getRandomArray,
     hideElements: hideElements,
-    showElements: showElements
+    showElements: showElements,
+    setAddressValue: setAddressValue
   };
 })();
