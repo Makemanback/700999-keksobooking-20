@@ -84,7 +84,18 @@
         y: startCoords.y - moveEvt.clientY
       };
 
-      if (moveEvt.clientX > 135 && moveEvt.clientX < 1285 && moveEvt.clientY > 130 && moveEvt.clientY < 630) {
+      var workingArea = {
+        startX: 140,
+        endX: 1280,
+        startY: 130,
+        endY: 430
+      };
+
+      if (moveEvt.clientX > workingArea.startX &&
+          moveEvt.clientX < workingArea.endX &&
+          moveEvt.clientY > workingArea.startY &&
+          moveEvt.clientY < workingArea.endY) {
+
         startCoords = {
           x: moveEvt.clientX,
           y: moveEvt.clientY
