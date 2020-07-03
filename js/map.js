@@ -12,26 +12,6 @@
     });
   };
 
-
-  var onClickCloseCard = function (element, data) {
-    element.addEventListener('click', function () {
-
-      data.classList.add('hidden');
-      window.utils.makeElementsAvailable(window.renderedSelectors.mapPinsCollection);
-
-    });
-  };
-
-  var onEscCloseCard = function (data) {
-    document.addEventListener('keydown', function (evt) {
-      if (evt.key === 'Escape') {
-        evt.preventDefault();
-        data.classList.add('hidden');
-        window.utils.makeElementsAvailable(window.renderedSelectors.mapPinsCollection);
-      }
-    });
-  };
-
   var openCard = function () {
     window.pin.ads.forEach(function (item, index) {
       onClickOpenCard(window.renderedSelectors.mapPinsCollection[index], item);
@@ -40,22 +20,12 @@
 
   openCard();
 
-  var closeCard = function () {
-    for (var i = 0; i < window.renderedSelectors.mapCards.length; i++) {
-      onClickCloseCard(window.renderedSelectors.closeButtons[i], window.renderedSelectors.mapCards[i]);
-      onEscCloseCard(window.renderedSelectors.mapCards[i]);
-    }
-    document.removeEventListener('keydown', onEscCloseCard);
-  };
-
   var makePageActive = function () {
 
     window.htmlSelectors.map.classList.remove('map--faded');
     window.htmlSelectors.adForm.classList.remove('ad-form--disabled');
     window.utils.makeElementsAvailable(window.htmlSelectors.mapFeatures);
     window.utils.makeElementsAvailable(window.htmlSelectors.mapFilter);
-
-    closeCard();
     window.utils.showElements(window.renderedSelectors.mapPinsCollection);
   };
 

@@ -1,10 +1,7 @@
 'use strict';
 
 (function () {
-  var locationX = Math.round(window.data.MAP_PIN_WIDTH / 2 + window.htmlSelectors.mapPinMain.offsetLeft);
-  var locationY = Math.round(window.data.MAP_PIN_HEIHGT + window.htmlSelectors.mapPinMain.offsetTop);
-
-  window.htmlSelectors.adressInput.value = locationX + ', ' + locationY;
+  window.utils.setAddressValue();
 
   // валидация формы
   window.htmlSelectors.adFormTitle.setAttribute('required', true);
