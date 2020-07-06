@@ -101,7 +101,11 @@
         </fieldset>
         <fieldset class="ad-form__element ad-form__element--wide">
           <label class="ad-form__label" for="title">Заголовок объявления</label>
-          <input id="title" name="title" type="text" placeholder="Милая, уютная квартирка в центре Токио" minlength="30" maxlength="100">
+          <input id="title" name="title" type="text" placeholder="Милая, уютная квартирка в центре Токио" minlength="30" maxlength="100"
+
+          value="123456789012345678901234567890"
+
+          >
         </fieldset>
         <fieldset class="ad-form__element ad-form__element--wide">
           <label class="ad-form__label" for="address">Адрес</label>
@@ -118,7 +122,11 @@
         </fieldset>
         <fieldset class="ad-form__element">
           <label class="ad-form__label" for="price">Цена за ночь, руб.</label>
-          <input id="price" name="price" type="number" placeholder="1000" min="1000" max="1000000">
+          <input id="price" name="price" type="number" placeholder="1000" min="1000" max="1000000"
+
+          value="2000"
+
+          >
         </fieldset>
         <fieldset class="ad-form__element ad-form__element--time">
           <label class="ad-form__label" for="timein">Время заезда и выезда</label>
@@ -147,7 +155,11 @@
           <select id="capacity" name="capacity">
             <option value="3">для 3 гостей</option>
             <option value="2">для 2 гостей</option>
-            <option value="1">для 1 гостя</option>
+            <option value="1"
+
+            selected
+
+            >для 1 гостя</option>
             <option value="0">не для гостей</option>
           </select>
         </fieldset>
@@ -252,9 +264,9 @@
   <script src="js/data.js"></script>
   <script src="js/html-selectors.js"></script>
   <script src="js/utils.js"></script>
+  <script src="js/card.js"></script>
   <script src="js/backend.js"></script>
   <script src="js/pin.js"></script>
-  <script src="js/card.js"></script>
   <script src="js/rendered-selectors.js"></script>
   <script src="js/map.js"></script>
   <script src="js/form.js"></script>

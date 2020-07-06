@@ -111,4 +111,12 @@
   window.htmlSelectors.adFormSubmit.addEventListener('click', function () {
     setRoomsToGuests();
   });
+
+  var resetForm = function (evt) {
+    evt.preventDefault();
+    window.htmlSelectors.adForm.reset();
+  };
+
+  window.htmlSelectors.adFormReset.addEventListener('click', resetForm);
+  window.htmlSelectors.adFormReset.removeEventListener('click', resetForm);
 })();
