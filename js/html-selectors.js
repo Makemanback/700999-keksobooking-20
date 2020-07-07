@@ -22,6 +22,9 @@
   var timeIn = document.querySelector('#timein');
   var timeOut = document.querySelector('#timeout');
 
+  var successTemplate = document.querySelector('#success').content;
+  var errorTemplate = document.querySelector('#error').content;
+
 
   window.htmlSelectors = {
     map: map,
@@ -42,6 +45,8 @@
     roomNumber: roomNumber,
     roomCapacity: roomCapacity,
     timeIn: timeIn,
-    timeOut: timeOut
+    timeOut: timeOut,
+    successTemplate: successTemplate,
+    errorTemplate: errorTemplate
   };
 })();

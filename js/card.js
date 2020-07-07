@@ -1,6 +1,8 @@
 'use strict';
 
 (function () {
+  var PINS_QUANTITY = 10;
+
   // функция фото
   var getPhotos = function (array, block) {
     var fragmentPhoto = document.createDocumentFragment();
@@ -104,10 +106,90 @@
     return mapCard;
   };
 
+  var successHandler = function (ads) {
+    var fragment = document.createDocumentFragment();
+
+    for (var i = 0; i < PINS_QUANTITY; i++) {
+      fragment.appendChild(window.card.createAd(ads[i]));
+    }
+    window.htmlSelectors.mapPins.appendChild(fragment);
+
+    var pinsCollection = document.querySelectorAll('.map__pin:not(.map__pin--main');
+
+    window.utils.hideElements(pinsCollection);
+
+    window.htmlSelectors.mapPinMain.addEventListener('mousedown', function (evt) {
+      evt.preventDefault();
+      window.utils.showElements(pinsCollection);
+    });
+
+    var openMap = function (evt) {
+      if (evt.key === 'Enter') {
+        evt.preventDefault();
+        window.utils.showElements(pinsCollection);
+      }
+    };
+
+    window.htmlSelectors.mapPinMain.addEventListener('keydown', openMap);
+
+    var removeCard = function () {
+      if (window.htmlSelectors.map.querySelector('.map__card')) {
+        window.htmlSelectors.map.querySelector('.map__card').remove();
+      }
+    };
+
+    var renderMapCard = function (element) {
+      var fragmentSecond = document.createDocumentFragment();
+      fragmentSecond.appendChild(window.card.createMapCard(element));
+      window.htmlSelectors.map.insertBefore(fragmentSecond, window.htmlSelectors.mapFilters);
+
+      var popupClose = document.querySelector('.popup__close');
+
+      popupClose.addEventListener('click', function () {
+        removeCard();
+      });
+      popupClose.addEventListener('keydown', function (evt) {
+        evt.preventDefault();
+        if (evt.key === 'Enter') {
+          removeCard();
+        }
+      });
+      popupClose.removeEventListener('keydown', function (evt) {
+        evt.preventDefault();
+        if (evt.key === 'Enter') {
+          removeCard();
+        }
+      });
+
+      document.addEventListener('keydown', function (evt) {
+        evt.preventDefault();
+        if (evt.key === 'Escape') {
+          removeCard();
+        }
+      });
+    };
+
+    var onClickOpenCard = function (element, data) {
+      element.addEventListener('click', function () {
+        removeCard();
+        renderMapCard(data);
+      });
+    };
+
+    var openCard = function () {
+      ads.forEach(function (item, index) {
+        onClickOpenCard(pinsCollection[index], item);
+      });
+    };
+
+    openCard();
+  };
+
   window.card = {
     getPhotos: getPhotos,
     createFeatures: createFeatures,
     createAd: createAd,
-    createMapCard: createMapCard
+    createMapCard: createMapCard,
+    successHandler: successHandler
   };
 })();

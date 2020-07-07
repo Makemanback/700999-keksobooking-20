@@ -44,6 +44,14 @@
     window.htmlSelectors.adressInput.value = locationX + ', ' + locationY;
   };
 
+  var disablePage = function () {
+    window.htmlSelectors.map.classList.add('map--faded');
+    window.htmlSelectors.adForm.classList.add('ad-form--disabled');
+    var pinsCollection = document.querySelectorAll('.map__pin:not(.map__pin--main');
+    hideElements(pinsCollection);
+    window.htmlSelectors.adForm.reset();
+  };
+
   window.utils = {
     makeElementsDisabled: makeElementsDisabled,
     makeElementsAvailable: makeElementsAvailable,
@@ -52,6 +60,7 @@
     getRandomArray: getRandomArray,
     hideElements: hideElements,
     showElements: showElements,
-    setAddressValue: setAddressValue
+    setAddressValue: setAddressValue,
+    disablePage: disablePage
   };
 })();
