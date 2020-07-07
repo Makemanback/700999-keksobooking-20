@@ -16,6 +16,14 @@
   var photos = ['http://o0.github.io/assets/images/tokyo/hotel1.jpg', 'http://o0.github.io/assets/images/tokyo/hotel2.jpg', 'http://o0.github.io/assets/images/tokyo/hotel3.jpg'];
   var ads = [];
 
+  var StatusCode = {
+    OK: 200,
+    notSuppot: 501,
+    internalError: 500
+  };
+  var URL = 'https://javascript.pages.academy/keksobooking/data';
+  var sendURL = 'https://javascript.pages.academy/keksobooking';
+
   window.data = {
     ADS_QUANTITY: ADS_QUANTITY,
     AD_WIDTH: AD_WIDTH,
@@ -29,6 +37,9 @@
     features: features,
     description: description,
     photos: photos,
-    ads: ads
+    ads: ads,
+    StatusCode: StatusCode,
+    URL: URL,
+    sendURL: sendURL
   };
 })();

@@ -15,11 +15,16 @@
   var adFormTitle = document.querySelector('#title');
   var adFormType = document.querySelector('#type');
   var adFormPrice = document.querySelector('#price');
+  var adFormReset = document.querySelector('.ad-form__reset');
   var adressInput = document.querySelector('#address');
   var roomNumber = document.querySelector('#room_number');
   var roomCapacity = document.querySelector('#capacity');
   var timeIn = document.querySelector('#timein');
   var timeOut = document.querySelector('#timeout');
+
+  var successTemplate = document.querySelector('#success').content;
+  var errorTemplate = document.querySelector('#error').content;
+
 
   window.htmlSelectors = {
     map: map,
@@ -36,9 +41,12 @@
     adFormType: adFormType,
     adFormPrice: adFormPrice,
     adressInput: adressInput,
+    adFormReset: adFormReset,
     roomNumber: roomNumber,
     roomCapacity: roomCapacity,
     timeIn: timeIn,
-    timeOut: timeOut
+    timeOut: timeOut,
+    successTemplate: successTemplate,
+    errorTemplate: errorTemplate
   };
 })();
