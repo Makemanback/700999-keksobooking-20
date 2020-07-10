@@ -1,7 +1,7 @@
 'use strict';
 
 (function () {
-  var PINS_QUANTITY = 10;
+  var PINS_QUANTITY = 5;
 
   // функция фото
   var getPhotos = function (array, block) {
@@ -107,7 +107,7 @@
   };
 
   window.renderPins = function (ads) {
-    var housingType = document.querySelector('#housing-type');
+
     var fragment = document.createDocumentFragment();
 
     for (var i = 0; i < PINS_QUANTITY; i++) {
@@ -116,24 +116,10 @@
     window.htmlSelectors.mapPins.appendChild(fragment);
   }
 
-
-  window.updateCards = function () {
-
-    if (housingType.value === 'any') {
-      window.renderPins(ads);
-    }
-  };
-
   var successHandler = function (ads) {
-    // updateCards();
-    var fragment = document.createDocumentFragment();
+    window.renderPins(ads);
 
-    for (var i = 0; i < PINS_QUANTITY; i++) {
-      fragment.appendChild(window.card.createAd(ads[i]));
-    }
-    window.htmlSelectors.mapPins.appendChild(fragment);
     var pinsCollection = document.querySelectorAll('.map__pin:not(.map__pin--main');
-
     window.utils.hideElements(pinsCollection);
 
     window.htmlSelectors.mapPinMain.addEventListener('mousedown', function (evt) {
@@ -196,9 +182,97 @@
 
     var openCard = function () {
       for (var i = 0; i < PINS_QUANTITY; i++) {
-        onClickOpenCard(pinsCollection[i]);
+        onClickOpenCard(pinsCollection[i], ads[i]);
       }
     };
+
+    var housingType = document.querySelector('#housing-type');
+
+    var updatePins = function () {
+
+      removeCard();
+      var fragment = document.createDocumentFragment();
+
+      for (var i = 0; i < ads.length; i++) {
+        if (housingType.value === 'house' && ads[i].offer.type === housingType.value) {
+          fragment.appendChild(window.card.createAd(ads[i]));
+        } else if (housingType.value === 'bungalo' && ads[i].offer.type === housingType.value) {
+          fragment.appendChild(window.card.createAd(ads[i]));
+        } else if (housingType.value === 'flat' && ads[i].offer.type === housingType.value) {
+          fragment.appendChild(window.card.createAd(ads[i]));
+        } else if (housingType.value === 'palace' && ads[i].offer.type === housingType.value) {
+          fragment.appendChild(window.card.createAd(ads[i]));
+        }
+      }
+
+      window.htmlSelectors.mapPins.appendChild(fragment);
+
+      var pinsCollection = document.querySelectorAll('.map__pin:not(.map__pin--main');
+
+      var renderMapCard = function (element) {
+        var fragmentSecond = document.createDocumentFragment();
+        fragmentSecond.appendChild(createMapCard(element));
+        window.htmlSelectors.map.insertBefore(fragmentSecond, window.htmlSelectors.mapFilters);
+
+        var popupClose = document.querySelector('.popup__close');
+
+        popupClose.addEventListener('click', function () {
+          removeCard();
+        });
+        popupClose.addEventListener('keydown', function (evt) {
+          evt.preventDefault();
+          if (evt.key === 'Enter') {
+            removeCard();
+          }
+        });
+        popupClose.removeEventListener('keydown', function (evt) {
+          evt.preventDefault();
+          if (evt.key === 'Enter') {
+            removeCard();
+          }
+        });
+
+        document.addEventListener('keydown', function (evt) {
+          evt.preventDefault();
+          if (evt.key === 'Escape') {
+            removeCard();
+          }
+        });
+      };
+
+      var onClickOpenCard = function (element, data) {
+        // console.log(data);
+        element.addEventListener('click', function () {
+          removeCard();
+          renderMapCard(data);
+        });
+      };
+
+      var openCard = function () {
+
+        for (var i = 0; i < PINS_QUANTITY; i++) {
+          // console.log(ads[i]);
+          onClickOpenCard(pinsCollection[i], ads[i]);
+        }
+      };
+      openCard();
+
+    }
+
+    var removePins = function () {
+      var pinsCollection = document.querySelectorAll('.map__pin:not(.map__pin--main');
+      for (var i = pinsCollection.length; i--;) {
+        window.htmlSelectors.mapPins.removeChild(pinsCollection[i]);
+      }
+    }
+
+    var newPins = function (evt) {
+      evt.preventDefault();
+      removePins();
+      updatePins();
+    }
+
+    housingType.addEventListener('change', newPins);
 
     openCard();
   };
