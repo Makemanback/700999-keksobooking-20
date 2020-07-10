@@ -106,14 +106,32 @@
     return mapCard;
   };
 
-  var successHandler = function (ads) {
+  window.renderPins = function (ads) {
+    var housingType = document.querySelector('#housing-type');
     var fragment = document.createDocumentFragment();
 
     for (var i = 0; i < PINS_QUANTITY; i++) {
       fragment.appendChild(window.card.createAd(ads[i]));
     }
     window.htmlSelectors.mapPins.appendChild(fragment);
+  }
 
+
+  window.updateCards = function () {
+
+    if (housingType.value === 'any') {
+      window.renderPins(ads);
+    }
+  };
+
+  var successHandler = function (ads) {
+    // updateCards();
+    var fragment = document.createDocumentFragment();
+
+    for (var i = 0; i < PINS_QUANTITY; i++) {
+      fragment.appendChild(window.card.createAd(ads[i]));
+    }
+    window.htmlSelectors.mapPins.appendChild(fragment);
     var pinsCollection = document.querySelectorAll('.map__pin:not(.map__pin--main');
 
     window.utils.hideElements(pinsCollection);
@@ -140,7 +158,7 @@
 
     var renderMapCard = function (element) {
       var fragmentSecond = document.createDocumentFragment();
-      fragmentSecond.appendChild(window.card.createMapCard(element));
+      fragmentSecond.appendChild(createMapCard(element));
       window.htmlSelectors.map.insertBefore(fragmentSecond, window.htmlSelectors.mapFilters);
 
       var popupClose = document.querySelector('.popup__close');
@@ -177,9 +195,9 @@
     };
 
     var openCard = function () {
-      ads.forEach(function (item, index) {
-        onClickOpenCard(pinsCollection[index], item);
-      });
+      for (var i = 0; i < PINS_QUANTITY; i++) {
+        onClickOpenCard(pinsCollection[i]);
+      }
     };
 
     openCard();

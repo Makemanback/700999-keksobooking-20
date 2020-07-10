@@ -22,6 +22,7 @@
     internalError: 500
   };
   var URL = 'https://javascript.pages.academy/keksobooking/data';
+  var URL = 'server.json';
   var sendURL = 'https://javascript.pages.academy/keksobooking';
 
   window.data = {
