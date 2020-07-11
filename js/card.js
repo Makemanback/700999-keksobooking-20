@@ -114,7 +114,7 @@
       fragment.appendChild(window.card.createAd(ads[i]));
     }
     window.htmlSelectors.mapPins.appendChild(fragment);
-  }
+  };
 
   var successHandler = function (ads) {
     window.renderPins(ads);
@@ -181,7 +181,7 @@
     };
 
     var openCard = function () {
-      for (var i = 0; i < PINS_QUANTITY; i++) {
+      for (var i = 0; i < pinsCollection.length; i++) {
         onClickOpenCard(pinsCollection[i], ads[i]);
       }
     };
@@ -192,85 +192,63 @@
 
       removeCard();
       var fragment = document.createDocumentFragment();
+      var filteredAds = ads.filter(function (type) {
+        return type.offer.type === housingType.value;
+      });
 
       for (var i = 0; i < ads.length; i++) {
         if (housingType.value === 'house' && ads[i].offer.type === housingType.value) {
           fragment.appendChild(window.card.createAd(ads[i]));
+          // filteredAds;
         } else if (housingType.value === 'bungalo' && ads[i].offer.type === housingType.value) {
           fragment.appendChild(window.card.createAd(ads[i]));
+          // filteredAds = ads.filter(function (type) {
+          //   return type.offer.type === housingType.value;
+          // });
         } else if (housingType.value === 'flat' && ads[i].offer.type === housingType.value) {
           fragment.appendChild(window.card.createAd(ads[i]));
+          // filteredAds = ads.filter(function (type) {
+          //   return type.offer.type === housingType.value;
+          // });
         } else if (housingType.value === 'palace' && ads[i].offer.type === housingType.value) {
           fragment.appendChild(window.card.createAd(ads[i]));
+          // filteredAds = ads.filter(function (type) {
+          //   return type.offer.type === housingType.value;
+          // });
+        }
+      }
+
+      for (var j = 0; j < PINS_QUANTITY; j++) {
+        if (housingType.value === 'any') {
+          fragment.appendChild(window.card.createAd(ads[j]));
+          filteredAds = ads;
         }
       }
 
       window.htmlSelectors.mapPins.appendChild(fragment);
 
-      var pinsCollection = document.querySelectorAll('.map__pin:not(.map__pin--main');
+      var secondPinsCollection = document.querySelectorAll('.map__pin:not(.map__pin--main');
 
-      var renderMapCard = function (element) {
-        var fragmentSecond = document.createDocumentFragment();
-        fragmentSecond.appendChild(createMapCard(element));
-        window.htmlSelectors.map.insertBefore(fragmentSecond, window.htmlSelectors.mapFilters);
-
-        var popupClose = document.querySelector('.popup__close');
-
-        popupClose.addEventListener('click', function () {
-          removeCard();
-        });
-        popupClose.addEventListener('keydown', function (evt) {
-          evt.preventDefault();
-          if (evt.key === 'Enter') {
-            removeCard();
-          }
-        });
-        popupClose.removeEventListener('keydown', function (evt) {
-          evt.preventDefault();
-          if (evt.key === 'Enter') {
-            removeCard();
-          }
-        });
-
-        document.addEventListener('keydown', function (evt) {
-          evt.preventDefault();
-          if (evt.key === 'Escape') {
-            removeCard();
-          }
-        });
-      };
-
-      var onClickOpenCard = function (element, data) {
-        // console.log(data);
-        element.addEventListener('click', function () {
-          removeCard();
-          renderMapCard(data);
-        });
-      };
-
-      var openCard = function () {
-
-        for (var i = 0; i < PINS_QUANTITY; i++) {
-          // console.log(ads[i]);
-          onClickOpenCard(pinsCollection[i], ads[i]);
+      var updateCard = function () {
+        for (var k = 0; k < secondPinsCollection.length; k++) {
+          onClickOpenCard(secondPinsCollection[k], filteredAds[k]);
         }
       };
-      openCard();
-
-    }
+      updateCard();
+    };
 
     var removePins = function () {
-      var pinsCollection = document.querySelectorAll('.map__pin:not(.map__pin--main');
-      for (var i = pinsCollection.length; i--;) {
-        window.htmlSelectors.mapPins.removeChild(pinsCollection[i]);
+      var thirdPinsCollection = document.querySelectorAll('.map__pin:not(.map__pin--main');
+      for (var i = thirdPinsCollection.length; i--;) {
+        window.htmlSelectors.mapPins.removeChild(thirdPinsCollection[i]);
       }
-    }
+    };
 
     var newPins = function (evt) {
       evt.preventDefault();
       removePins();
       updatePins();
-    }
+    };
 
     housingType.addEventListener('change', newPins);
 
