@@ -199,22 +199,12 @@
       for (var i = 0; i < ads.length; i++) {
         if (housingType.value === 'house' && ads[i].offer.type === housingType.value) {
           fragment.appendChild(window.card.createAd(ads[i]));
-          // filteredAds;
         } else if (housingType.value === 'bungalo' && ads[i].offer.type === housingType.value) {
           fragment.appendChild(window.card.createAd(ads[i]));
-          // filteredAds = ads.filter(function (type) {
-          //   return type.offer.type === housingType.value;
-          // });
         } else if (housingType.value === 'flat' && ads[i].offer.type === housingType.value) {
           fragment.appendChild(window.card.createAd(ads[i]));
-          // filteredAds = ads.filter(function (type) {
-          //   return type.offer.type === housingType.value;
-          // });
         } else if (housingType.value === 'palace' && ads[i].offer.type === housingType.value) {
           fragment.appendChild(window.card.createAd(ads[i]));
-          // filteredAds = ads.filter(function (type) {
-          //   return type.offer.type === housingType.value;
-          // });
         }
       }
 
