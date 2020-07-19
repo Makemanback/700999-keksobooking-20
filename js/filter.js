@@ -20,7 +20,6 @@
   var featureConditioner = document.querySelector('#filter-conditioner');
 
   window.onFilterChange = function (ads) {
-    // window.setTimeout(function () {
     var filteredByType = ads.filter(function (ad) {
       if (housingType.value === 'any') {
         return ad;

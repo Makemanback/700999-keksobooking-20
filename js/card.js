@@ -207,7 +207,7 @@
       updateCard();
     };
 
-    filter.addEventListener('change', updatePins);
+    filter.addEventListener('change', window.debounce(updatePins));
     openCard();
   };
 

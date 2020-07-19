@@ -38,10 +38,11 @@
     }
   };
 
+  var adressInput = document.querySelector('#address');
   var setAddressValue = function () {
     var locationX = Math.round(window.data.MAP_PIN_WIDTH / 2 + window.htmlSelectors.mapPinMain.offsetLeft);
     var locationY = Math.round(window.data.MAP_PIN_HEIHGT + window.htmlSelectors.mapPinMain.offsetTop);
-    window.htmlSelectors.adressInput.value = locationX + ', ' + locationY;
+    adressInput.value = locationX + ', ' + locationY;
   };
 
   var disablePage = function () {
