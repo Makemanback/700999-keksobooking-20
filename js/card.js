@@ -78,7 +78,6 @@
     mapCardDescription.textContent = ad.offer.description;
     mapCardAvatar.src = ad.author.avatar;
 
-
     for (var i = mapCardFeatures.length; i--;) {
       mapCardFeaturesContainer.removeChild(mapCardFeatures[i]);
     }
@@ -186,66 +185,34 @@
       }
     };
 
-    var housingType = document.querySelector('#housing-type');
+    var filter = document.querySelector('.map__filters');
 
     var updatePins = function () {
-
+      window.removePins();
       removeCard();
+      window.onFilterChange(ads);
+
       var fragment = document.createDocumentFragment();
-      var filteredAds = ads.filter(function (type) {
-        return type.offer.type === housingType.value;
-      });
-
-      for (var i = 0; i < ads.length; i++) {
-        if (housingType.value === 'house' && ads[i].offer.type === housingType.value) {
-          fragment.appendChild(window.card.createAd(ads[i]));
-        } else if (housingType.value === 'bungalo' && ads[i].offer.type === housingType.value) {
-          fragment.appendChild(window.card.createAd(ads[i]));
-        } else if (housingType.value === 'flat' && ads[i].offer.type === housingType.value) {
-          fragment.appendChild(window.card.createAd(ads[i]));
-        } else if (housingType.value === 'palace' && ads[i].offer.type === housingType.value) {
-          fragment.appendChild(window.card.createAd(ads[i]));
-        }
+      for (var j = 0; j < window.onFilterChange(ads).length; j++) {
+        fragment.appendChild(createAd(window.onFilterChange(ads)[j]));
       }
-
-      for (var j = 0; j < PINS_QUANTITY; j++) {
-        if (housingType.value === 'any') {
-          fragment.appendChild(window.card.createAd(ads[j]));
-          filteredAds = ads;
-        }
-      }
-
       window.htmlSelectors.mapPins.appendChild(fragment);
 
       var secondPinsCollection = document.querySelectorAll('.map__pin:not(.map__pin--main');
-
       var updateCard = function () {
         for (var k = 0; k < secondPinsCollection.length; k++) {
-          onClickOpenCard(secondPinsCollection[k], filteredAds[k]);
+          onClickOpenCard(secondPinsCollection[k], window.onFilterChange(ads)[k]);
         }
       };
       updateCard();
     };
 
-    var removePins = function () {
-      var thirdPinsCollection = document.querySelectorAll('.map__pin:not(.map__pin--main');
-      for (var i = thirdPinsCollection.length; i--;) {
-        window.htmlSelectors.mapPins.removeChild(thirdPinsCollection[i]);
-      }
-    };
-
-    var newPins = function (evt) {
-      evt.preventDefault();
-      removePins();
-      updatePins();
-    };
-
-    housingType.addEventListener('change', newPins);
-
+    filter.addEventListener('change', window.debounce(updatePins));
     openCard();
   };
 
   window.card = {
+    PINS_QUANTITY: PINS_QUANTITY,
     getPhotos: getPhotos,
     createFeatures: createFeatures,
     createAd: createAd,

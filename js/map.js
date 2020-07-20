@@ -4,9 +4,10 @@
   window.utils.makeElementsDisabled(window.htmlSelectors.mapFeatures);
   window.utils.makeElementsDisabled(window.htmlSelectors.mapFiltersSelects);
 
+  var adForm = document.querySelector('.ad-form');
   var makePageActive = function () {
     window.htmlSelectors.map.classList.remove('map--faded');
-    window.htmlSelectors.adForm.classList.remove('ad-form--disabled');
+    adForm.classList.remove('ad-form--disabled');
     window.utils.makeElementsAvailable(window.htmlSelectors.mapFeatures);
     window.utils.makeElementsAvailable(window.htmlSelectors.mapFilter);
   };
