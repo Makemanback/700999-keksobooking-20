@@ -32,7 +32,7 @@
     document.body.insertAdjacentElement('afterbegin', node);
   };
 
-  load(window.card.successHandler, onErrorPopup);
+  load(window.card.onDownload, onErrorPopup);
 
   var onSuccess = function () {
     var fragmentThird = document.createDocumentFragment();
@@ -93,7 +93,7 @@
       onErrorPopup('Произошла ошибка соединения');
     });
 
-    xhr.open('POST', window.data.sendURL);
+    xhr.open('POST', window.data.SEND_URL);
     xhr.send(data);
   };
 

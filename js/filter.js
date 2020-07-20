@@ -19,7 +19,7 @@
   var featureElevator = document.querySelector('#filter-elevator');
   var featureConditioner = document.querySelector('#filter-conditioner');
 
-  window.onFilterChange = function (ads) {
+  window.filterChange = function (ads) {
     var filteredByType = ads.filter(function (ad) {
       if (housingType.value === 'any') {
         return ad;

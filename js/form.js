@@ -14,7 +14,6 @@
 
   window.utils.setAddressValue();
 
-  // валидация формы
   adFormTitle.setAttribute('required', true);
   adFormPrice.setAttribute('required', true);
 
@@ -86,7 +85,6 @@
     setTime(timeIn, timeOut);
   });
 
-  // кастомные сообщения валидации
   var checkAdFormTitleValidity = function () {
     var validityStateObject = adFormTitle.validity;
     if (validityStateObject.valueMissing) {

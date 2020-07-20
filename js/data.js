@@ -6,6 +6,8 @@
   var AD_HEIGHT = 70;
   var MAP_PIN_WIDTH = 65;
   var MAP_PIN_HEIHGT = 65;
+  var URL = 'https://javascript.pages.academy/keksobooking/data';
+  var SEND_URL = 'https://javascript.pages.academy/keksobooking';
 
   var titles = ['первый', 'второй', 'третий', 'четвертый', 'пятый', 'шестой', 'седьмой', 'восьмой'];
   var type = ['palace', 'flat', 'house', 'bungalo'];
@@ -21,9 +23,6 @@
     notSuppot: 501,
     internalError: 500
   };
-  var URL = 'https://javascript.pages.academy/keksobooking/data';
-  // var URL = 'server.json';
-  var sendURL = 'https://javascript.pages.academy/keksobooking';
 
   window.data = {
     ADS_QUANTITY: ADS_QUANTITY,
@@ -41,6 +40,6 @@
     ads: ads,
     StatusCode: StatusCode,
     URL: URL,
-    sendURL: sendURL
+    SEND_URL: SEND_URL
   };
 })();
