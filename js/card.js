@@ -3,7 +3,6 @@
 (function () {
   var PINS_QUANTITY = 5;
 
-  // функция фото
   var getPhotos = function (array, block) {
     var fragmentPhoto = document.createDocumentFragment();
 
@@ -21,7 +20,6 @@
     return block.appendChild(fragmentPhoto);
   };
 
-  // функция фич
   var fragmentFeatures = document.createDocumentFragment();
   var createFeatures = function (featuresList) {
     featuresList.forEach(function (feature) {
@@ -83,10 +81,8 @@
     }
     mapCardFeaturesContainer.appendChild(window.card.createFeatures(ad.offer.features));
 
-    // фотографии
     window.card.getPhotos(ad.offer.photos, mapCardPhotosContainer);
 
-    // типы жилья
     switch (ad.offer.type) {
       case ('flat'):
         mapCardType.textContent = 'квартира';
@@ -115,7 +111,7 @@
     window.htmlSelectors.mapPins.appendChild(fragment);
   };
 
-  var successHandler = function (ads) {
+  var onDownload = function (ads) {
     window.renderPins(ads);
 
     var pinsCollection = document.querySelectorAll('.map__pin:not(.map__pin--main');
@@ -187,27 +183,27 @@
 
     var filter = document.querySelector('.map__filters');
 
-    var updatePins = function () {
+    var onPinsUpdate = function () {
       window.removePins();
       removeCard();
-      window.onFilterChange(ads);
+      window.filterChange(ads);
 
       var fragment = document.createDocumentFragment();
-      for (var j = 0; j < window.onFilterChange(ads).length; j++) {
-        fragment.appendChild(createAd(window.onFilterChange(ads)[j]));
+      for (var j = 0; j < window.filterChange(ads).length; j++) {
+        fragment.appendChild(createAd(window.filterChange(ads)[j]));
       }
       window.htmlSelectors.mapPins.appendChild(fragment);
 
       var secondPinsCollection = document.querySelectorAll('.map__pin:not(.map__pin--main');
       var updateCard = function () {
         for (var k = 0; k < secondPinsCollection.length; k++) {
-          onClickOpenCard(secondPinsCollection[k], window.onFilterChange(ads)[k]);
+          onClickOpenCard(secondPinsCollection[k], window.filterChange(ads)[k]);
         }
       };
       updateCard();
     };
 
-    filter.addEventListener('change', window.debounce(updatePins));
+    filter.addEventListener('change', window.debounce(onPinsUpdate));
     openCard();
   };
 
@@ -217,6 +213,6 @@
     createFeatures: createFeatures,
     createAd: createAd,
     createMapCard: createMapCard,
-    successHandler: successHandler
+    onDownload: onDownload
   };
 })();

@@ -10,6 +10,8 @@
   var mapFeaturesFieldset = document.querySelector('.map__features');
   var mapFeatures = mapFeaturesFieldset.children;
 
+  var adForm = document.querySelector('.ad-form');
+
   var successTemplate = document.querySelector('#success').content;
   var errorTemplate = document.querySelector('#error').content;
 
@@ -23,6 +25,7 @@
     mapFiltersSelects: mapFiltersSelects,
     mapFeaturesFieldset: mapFeaturesFieldset,
     mapFeatures: mapFeatures,
+    adForm: adForm,
     successTemplate: successTemplate,
     errorTemplate: errorTemplate
   };
