@@ -11,6 +11,12 @@
   var roomCapacity = document.querySelector('#capacity');
   var timeIn = document.querySelector('#timein');
   var timeOut = document.querySelector('#timeout');
+  var MinPrice = {
+    bungalo: 0,
+    flat: 1000,
+    house: 5000,
+    palace: 10000
+  };
 
   window.utils.setAddressValue();
 
@@ -20,20 +26,20 @@
   var setMinValue = function () {
     switch (adFormType.value) {
       case ('bungalo'):
-        adFormPrice.setAttribute('min', 0);
-        adFormPrice.setAttribute('placeholder', 0);
+        adFormPrice.setAttribute('min', MinPrice.bungalo);
+        adFormPrice.setAttribute('placeholder', MinPrice.bungalo);
         break;
       case ('flat'):
-        adFormPrice.setAttribute('min', 1000);
-        adFormPrice.setAttribute('placeholder', 1000);
+        adFormPrice.setAttribute('min', MinPrice.flat);
+        adFormPrice.setAttribute('placeholder', MinPrice.flat);
         break;
       case ('house'):
-        adFormPrice.setAttribute('min', 5000);
-        adFormPrice.setAttribute('placeholder', 5000);
+        adFormPrice.setAttribute('min', MinPrice.house);
+        adFormPrice.setAttribute('placeholder', MinPrice.house);
         break;
       case ('palace'):
-        adFormPrice.setAttribute('min', 10000);
-        adFormPrice.setAttribute('placeholder', 10000);
+        adFormPrice.setAttribute('min', MinPrice.palace);
+        adFormPrice.setAttribute('placeholder', MinPrice.palace);
         break;
     }
   };
@@ -123,11 +129,13 @@
 
   var resetForm = function (evt) {
     evt.preventDefault();
+    window.utils.disablePage();
     adForm.reset();
+    window.utils.setAddressValue();
   };
 
   adFormReset.addEventListener('click', resetForm);
-  adFormReset.removeEventListener('click', resetForm);
+
 
   var onSubmit = function (evt) {
     window.backend.save(new FormData(adForm), window.utils.disablePage);

@@ -65,7 +65,6 @@
     var mapCardDescription = mapCard.querySelector('.popup__description');
     var mapCardAvatar = mapCard.querySelector('.popup__avatar');
     var mapCardFeaturesContainer = mapCard.querySelector('.popup__features');
-    var mapCardFeatures = mapCardFeaturesContainer.children;
     var mapCardPhotosContainer = mapCard.querySelector('.popup__photos');
 
     mapCardTitle.textContent = ad.offer.title;
@@ -76,9 +75,7 @@
     mapCardDescription.textContent = ad.offer.description;
     mapCardAvatar.src = ad.author.avatar;
 
-    for (var i = mapCardFeatures.length; i--;) {
-      mapCardFeaturesContainer.removeChild(mapCardFeatures[i]);
-    }
+    mapCardFeaturesContainer.innerHTML = '';
     mapCardFeaturesContainer.appendChild(window.card.createFeatures(ad.offer.features));
 
     window.card.getPhotos(ad.offer.photos, mapCardPhotosContainer);
@@ -144,28 +141,31 @@
 
       var popupClose = document.querySelector('.popup__close');
 
-      popupClose.addEventListener('click', function () {
-        removeCard();
-      });
-      popupClose.addEventListener('keydown', function (evt) {
+      var resetPopupEnter = function (evt) {
         evt.preventDefault();
         if (evt.key === 'Enter') {
           removeCard();
         }
-      });
-      popupClose.removeEventListener('keydown', function (evt) {
-        evt.preventDefault();
-        if (evt.key === 'Enter') {
-          removeCard();
-        }
-      });
+        popupClose.removeEventListener('keydown', resetPopupEnter);
+      };
 
-      document.addEventListener('keydown', function (evt) {
+      var resetPopupEsc = function (evt) {
         evt.preventDefault();
         if (evt.key === 'Escape') {
           removeCard();
         }
-      });
+        document.removeEventListener('keydown', resetPopupEsc);
+      };
+
+      var resetPopupClick = function (evt) {
+        evt.preventDefault();
+        removeCard();
+        popupClose.removeEventListener('click', resetPopupClick);
+      };
+
+      popupClose.addEventListener('keydown', resetPopupEnter);
+      popupClose.addEventListener('click', resetPopupClick);
+      document.addEventListener('keydown', resetPopupEsc);
     };
 
     var onClickOpenCard = function (element, data) {

@@ -2,10 +2,10 @@
 
 (function () {
   window.removePins = function () {
-    var PinsCollection = document.querySelectorAll('.map__pin:not(.map__pin--main');
-    for (var i = PinsCollection.length; i--;) {
-      window.htmlSelectors.mapPins.removeChild(PinsCollection[i]);
-    }
+    var pinsCollection = document.querySelectorAll('.map__pin:not(.map__pin--main');
+    pinsCollection.forEach(function (item) {
+      item.remove();
+    });
   };
 
   var housingType = document.querySelector('#housing-type');
@@ -53,42 +53,42 @@
     });
 
     var filteredByWifi = filteredByGuests.filter(function (ad) {
-      if (featureWifi.checked === true) {
+      if (featureWifi.checked) {
         return ad.offer.features.includes('wifi');
       }
       return filteredByGuests;
     });
 
     var filteredByDishwasher = filteredByWifi.filter(function (ad) {
-      if (featureDishwasher.checked === true) {
+      if (featureDishwasher.checked) {
         return ad.offer.features.includes('dishwasher');
       }
       return filteredByWifi;
     });
 
     var filteredByParking = filteredByDishwasher.filter(function (ad) {
-      if (featureParking.checked === true) {
+      if (featureParking.checked) {
         return ad.offer.features.includes('parking');
       }
       return filteredByDishwasher;
     });
 
     var filteredByWasher = filteredByParking.filter(function (ad) {
-      if (featureWasher.checked === true) {
+      if (featureWasher.checked) {
         return ad.offer.features.includes('washer');
       }
       return filteredByParking;
     });
 
     var filteredByElevator = filteredByWasher.filter(function (ad) {
-      if (featureElevator.checked === true) {
+      if (featureElevator.checked) {
         return ad.offer.features.includes('washer');
       }
       return filteredByWasher;
     });
 
     var filteredByConditioner = filteredByElevator.filter(function (ad) {
-      if (featureConditioner.checked === true) {
+      if (featureConditioner.checked) {
         return ad.offer.features.includes('washer');
       }
       return filteredByElevator;

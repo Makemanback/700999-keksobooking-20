@@ -5,7 +5,7 @@
     startX: window.htmlSelectors.map.offsetLeft + window.data.MAP_PIN_WIDTH / 2,
     endX: window.htmlSelectors.map.offsetWidth - window.data.MAP_PIN_WIDTH / 2 + window.htmlSelectors.map.offsetLeft,
     startY: 130,
-    endY: 630 - window.data.MAP_PIN_HEIHGT
+    endY: 630 - window.data.MAP_PIN_HEIHGT - window.data.MAP_PIN_TAIL
   };
 
   window.htmlSelectors.mapPinMain.addEventListener('mousedown', function (evt) {
