@@ -10,7 +10,9 @@
     adForm.classList.remove('ad-form--disabled');
     window.utils.makeElementsAvailable(window.htmlSelectors.mapFeatures);
     window.utils.makeElementsAvailable(window.htmlSelectors.mapFilter);
+    window.utils.makeElementsAvailable(window.form.adFormElements);
     window.utils.setActiveAddressValue();
+    window.form.adFormHeader.removeAttribute('disabled');
   };
 
   var makeElementActive = function (evt) {

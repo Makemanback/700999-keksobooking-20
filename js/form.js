@@ -2,6 +2,7 @@
 
 (function () {
   var adForm = document.querySelector('.ad-form');
+  var adFormElements = document.querySelectorAll('.ad-form__element');
   var adFormSubmit = document.querySelector('.ad-form__submit');
   var adFormTitle = document.querySelector('#title');
   var adFormType = document.querySelector('#type');
@@ -17,6 +18,16 @@
     house: 5000,
     palace: 10000
   };
+
+  var disableFormElements = function () {
+    adFormElements.forEach(function (item) {
+      item.setAttribute('disabled', true);
+    });
+  };
+  disableFormElements();
+
+  var adFormHeader = document.querySelector('.ad-form-header');
+  adFormHeader.setAttribute('disabled', true);
 
   window.utils.setAddressValue();
 
@@ -142,4 +153,10 @@
     evt.preventDefault();
   };
   adForm.addEventListener('submit', onSubmit);
+
+  window.form = {
+    adFormElements: adFormElements,
+    disableFormElements: disableFormElements,
+    adFormHeader: adFormHeader
+  };
 })();

@@ -74,7 +74,9 @@
       item.value = 'any';
     });
     housingFeatures.forEach(function (item) {
-      item.checked = false;
+      if (item.checked) {
+        item.checked = false;
+      }
     });
   };
 
@@ -92,6 +94,8 @@
     returnMapPinMainPosition();
     window.htmlSelectors.adForm.reset();
     window.utils.setAddressValue();
+    window.form.disableFormElements();
+    window.form.adFormHeader.setAttribute('disabled', true);
   };
 
   window.utils = {
