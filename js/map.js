@@ -13,6 +13,7 @@
     window.utils.makeElementsAvailable(window.form.adFormElements);
     window.utils.setActiveAddressValue();
     window.form.adFormHeader.removeAttribute('disabled');
+    window.form.adFormReset.addEventListener('click', window.form.resetForm);
   };
 
   var makeElementActive = function (evt) {

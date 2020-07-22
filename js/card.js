@@ -141,12 +141,18 @@
 
       var popupClose = document.querySelector('.popup__close');
 
+      var removeListener = function (global, local) {
+        local.removeEventListener('keydown', resetPopupEnter);
+        global.removeEventListener('keydown', resetPopupEsc);
+        local.removeEventListener('click', resetPopupClick);
+      };
+
       var resetPopupEnter = function (evt) {
         evt.preventDefault();
         if (evt.key === 'Enter') {
           removeCard();
         }
-        popupClose.removeEventListener('keydown', resetPopupEnter);
+        removeListener(document, popupClose);
       };
 
       var resetPopupEsc = function (evt) {
@@ -154,13 +160,13 @@
         if (evt.key === 'Escape') {
           removeCard();
         }
-        document.removeEventListener('keydown', resetPopupEsc);
+        removeListener(document, popupClose);
       };
 
       var resetPopupClick = function (evt) {
         evt.preventDefault();
         removeCard();
-        popupClose.removeEventListener('click', resetPopupClick);
+        removeListener(document, popupClose);
       };
 
       popupClose.addEventListener('keydown', resetPopupEnter);

@@ -143,10 +143,8 @@
     window.utils.disablePage();
     adForm.reset();
     window.utils.setAddressValue();
+    adFormReset.removeEventListener('click', resetForm);
   };
-
-  adFormReset.addEventListener('click', resetForm);
-
 
   var onSubmit = function (evt) {
     window.backend.save(new FormData(adForm), window.utils.disablePage);
@@ -157,6 +155,8 @@
   window.form = {
     adFormElements: adFormElements,
     disableFormElements: disableFormElements,
-    adFormHeader: adFormHeader
+    adFormHeader: adFormHeader,
+    adFormReset: adFormReset,
+    resetForm: resetForm
   };
 })();
